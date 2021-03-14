@@ -11,6 +11,7 @@ import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonUnche
 import FlareRoundedIcon from "@material-ui/icons/FlareRounded";
 
 import { WelcomeModal } from "./welcomeModal";
+import { Cursor } from "../Cursor/cursor";
 
 import { questions } from "./questions";
 
@@ -68,12 +69,9 @@ export const Simulation = () => {
 
   const nextQuestion = useCallback(() => {
     if (gameIndex === questions.length - 1) {
-      console.log("finish");
-
       setGameState("END");
       setGameIndex(0);
     } else {
-      console.log("next");
       setGameIndex(gameIndex + 1);
       setTimeLeft(TIMER_LIMIT);
     }
@@ -85,15 +83,11 @@ export const Simulation = () => {
 
     if (timeLeft === -1) return nextQuestion();
 
-    // exit early when we reach 0
-    // if (!timeLeft) return;
     // save intervalId to clear the interval when the
     // component re-renders
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
       playCountdown();
-      console.log(timeLeft);
-      // console.log("index: " + gameIndex);
     }, 1000);
 
     // clear interval on re-render to avoid memory leaks
