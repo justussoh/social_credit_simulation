@@ -11,6 +11,7 @@ import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonUnche
 import FlareRoundedIcon from "@material-ui/icons/FlareRounded";
 
 import { WelcomeModal } from "./welcomeModal";
+import { Score } from "./score";
 
 import { questions } from "./questions";
 
@@ -20,6 +21,7 @@ import bgmSfx from "../../common/audio/Tracker.mp3";
 import countdownSfx from "../../common/audio/beep.wav";
 
 const TIMER_LIMIT = 5;
+const INIT_CREDIT_SCORE = 0;
 
 export const Simulation = () => {
   // Global Control
@@ -65,22 +67,28 @@ export const Simulation = () => {
   // Game State
   const [gameState, setGameState] = useState("START");
   const [gameIndex, setGameIndex] = useState(0);
+  const [creditScore, setCreditScore] = useState(INIT_CREDIT_SCORE);
+  const [prevCreditScore, setPrevCreditScore] = useState(INIT_CREDIT_SCORE);
 
-  const nextQuestion = useCallback(() => {
-    if (gameIndex === questions.length - 1) {
-      setGameState("END");
-      setGameIndex(0);
-    } else {
-      setGameIndex(gameIndex + 1);
-      setTimeLeft(TIMER_LIMIT);
-    }
-  }, [gameIndex]);
+  const nextQuestion = useCallback(
+    (value) => {
+      setPrevCreditScore(creditScore);
+      setCreditScore(creditScore + value);
+      if (gameIndex === questions.length - 1) {
+        setGameState("END");
+      } else {
+        setGameIndex(gameIndex + 1);
+        setTimeLeft(TIMER_LIMIT);
+      }
+    },
+    [gameIndex, creditScore]
+  );
 
   useEffect(() => {
     // Don't count if no timer
     if (!timerEnabled || gameState !== "GAME") return;
 
-    if (timeLeft === -1) return nextQuestion();
+    if (timeLeft === -1) return nextQuestion(questions[gameIndex].skip);
 
     // save intervalId to clear the interval when the
     // component re-renders
@@ -93,13 +101,20 @@ export const Simulation = () => {
     return () => clearInterval(intervalId);
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
-  }, [timeLeft, nextQuestion, timerEnabled, gameState, playCountdown]);
+  }, [
+    timeLeft,
+    nextQuestion,
+    timerEnabled,
+    gameState,
+    playCountdown,
+    gameIndex,
+  ]);
 
   const renderGame = () => {
     switch (gameState) {
       case "START":
         return (
-          <div>
+          <>
             Simulation
             <button
               onClick={() => {
@@ -109,23 +124,52 @@ export const Simulation = () => {
             >
               START
             </button>
-          </div>
+          </>
         );
       case "GAME":
         return (
-          <div>
+          <>
             {timerEnabled ? <code>{timeLeft}</code> : ""}
+            <Score
+              creditScore={creditScore}
+              prevCreditScore={prevCreditScore}
+            />
             <h1>{questions[gameIndex].question}</h1>
-            <button onClick={nextQuestion}>
+            <button
+              onClick={() =>
+                nextQuestion(questions[gameIndex].options[0].value)
+              }
+            >
               {questions[gameIndex].options[0].answer}
             </button>
-            <button onClick={nextQuestion}>
+            <button
+              onClick={() =>
+                nextQuestion(questions[gameIndex].options[1].value)
+              }
+            >
               {questions[gameIndex].options[1].answer}
             </button>
-          </div>
+          </>
         );
       case "END":
-        return <button onClick={() => setGameState("START")}>restart</button>;
+        return (
+          <>
+            <Score
+              creditScore={creditScore}
+              prevCreditScore={prevCreditScore}
+            />
+            <button
+              onClick={() => {
+                setGameState("START");
+                setGameIndex(0);
+                setPrevCreditScore(INIT_CREDIT_SCORE);
+                setCreditScore(INIT_CREDIT_SCORE);
+              }}
+            >
+              restart
+            </button>
+          </>
+        );
       default:
         return <div />;
     }

@@ -27,4 +27,18 @@ export const questions = [
     ],
     skip: 10,
   },
+  {
+    question: "test3",
+    options: [
+      {
+        answer: "answer 1",
+        value: 100,
+      },
+      {
+        answer: "answer 2",
+        value: -50,
+      },
+    ],
+    skip: 0,
+  },
 ];
