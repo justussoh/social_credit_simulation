@@ -19,9 +19,18 @@
   z-index: 2;
 }
 
-.red {
+.red-record {
   color: red;
   font-size: 50px!important;
+  position: absolute;
+  top: 32px;
+  right: 32px;
+}
+
+.settings{
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
 }
 
 @keyframes blinker {

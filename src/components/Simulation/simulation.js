@@ -114,7 +114,6 @@ export const Simulation = () => {
       case "GAME":
         return (
           <div>
-            <RadioButtonCheckedRoundedIcon className="blink red" />
             {timerEnabled ? <code>{timeLeft}</code> : ""}
             <h1>{questions[gameIndex].question}</h1>
             <button onClick={nextQuestion}>
@@ -135,8 +134,13 @@ export const Simulation = () => {
   return (
     <header className="App-header">
       {sirenEnabled ? <div className="siren level-1" /> : ""}
+      {gameState === "GAME" ? (
+        <RadioButtonCheckedRoundedIcon className="blink red-record" />
+      ) : (
+        ""
+      )}
       <div className="level-2">{renderGame()}</div>
-      <div className="level-2">
+      <div className="level-2 settings">
         <IconButton onClick={onMute} color="secondary">
           {!soundEnabled ? <VolumeOffRoundedIcon /> : <VolumeUpRoundedIcon />}
         </IconButton>
