@@ -1,7 +1,7 @@
-import './App.css';
+import "./App.css";
 import { Route, Switch } from "react-router-dom";
-import { About } from "./components/About/about"
-import { Simulation } from "./components/Simulation/simulation"
+import { About } from "./components/About/about";
+import { Simulation } from "./components/Simulation/simulation";
 
 function App() {
   return (

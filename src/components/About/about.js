@@ -1,8 +1,3 @@
-
 export const About = () => {
-    return (
-        <header className="App-header">
-        Hello
-      </header>
-    );
-  };
+  return <header className="App-header">Hello</header>;
+};
