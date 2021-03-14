@@ -2,6 +2,23 @@
   animation: blinker 3s linear infinite;
 }
 
+.siren {
+  animation: siren 3s ease infinite;
+  background-color: red;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.15;
+}
+
+.level-1{
+  z-index: 1;
+}
+
+.level-2{
+  z-index: 2;
+}
+
 .red {
   color: red;
   font-size: 50px!important;
@@ -10,5 +27,17 @@
 @keyframes blinker {
   50% {
     opacity: 0;
+  }
+}
+
+@keyframes siren {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: blue;
+  }
+  100%{
+    background-color: red;
   }
 }
