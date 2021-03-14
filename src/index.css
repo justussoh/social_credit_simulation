@@ -17,6 +17,10 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none;
+}
+
 .monster-font {
   font-family: Monster;
 }

@@ -11,7 +11,6 @@ import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonUnche
 import FlareRoundedIcon from "@material-ui/icons/FlareRounded";
 
 import { WelcomeModal } from "./welcomeModal";
-import { Cursor } from "../Cursor/cursor";
 
 import { questions } from "./questions";
 
@@ -138,13 +137,13 @@ export const Simulation = () => {
       {sirenEnabled ? <div className="siren level-1" /> : ""}
       <div className="level-2">{renderGame()}</div>
       <div className="level-2">
-        <IconButton onClick={onMute}>
+        <IconButton onClick={onMute} color="secondary">
           {!soundEnabled ? <VolumeOffRoundedIcon /> : <VolumeUpRoundedIcon />}
         </IconButton>
-        <IconButton onClick={onToggleTimer}>
+        <IconButton onClick={onToggleTimer} color="secondary">
           {!timerEnabled ? <TimerOffRoundedIcon /> : <TimerRoundedIcon />}
         </IconButton>
-        <IconButton onClick={onToggleSiren}>
+        <IconButton onClick={onToggleSiren} color="secondary">
           {!sirenEnabled ? (
             <RadioButtonUncheckedRoundedIcon />
           ) : (
