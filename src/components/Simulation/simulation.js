@@ -18,7 +18,7 @@ import { questions } from "./questions";
 import "./simulation.css";
 
 import bgmSfx from "../../common/audio/Tracker.mp3";
-import countdownSfx from "../../common/audio/beep.wav";
+import beepSfx from "../../common/audio/beep.mp3";
 
 const TIMER_LIMIT = 5;
 const INIT_CREDIT_SCORE = 0;
@@ -40,16 +40,15 @@ export const Simulation = () => {
     },
     interrupt: true,
     mute: !soundEnabled,
-    volume: 0.25,
+    volume: 0.4,
   });
-  const [playCountdown, { sound: countdownBeep }] = useSound(countdownSfx, {
+  const [playBeep] = useSound(beepSfx, {
     volume: 0.5,
   });
 
   const onMute = () => {
     setSoundEnabled(!soundEnabled);
     bgm.mute(soundEnabled);
-    countdownBeep.mute(soundEnabled);
   };
 
   // Timer Control
@@ -88,27 +87,33 @@ export const Simulation = () => {
     // Don't count if no timer
     if (!timerEnabled || gameState !== "GAME") return;
 
-    if (timeLeft === -1) return nextQuestion(questions[gameIndex].skip);
+    if (timeLeft < 0) return nextQuestion(questions[gameIndex].skip);
 
     // save intervalId to clear the interval when the
     // component re-renders
-    const intervalId = setInterval(() => {
-      setTimeLeft(timeLeft - 1);
-      playCountdown();
-    }, 1000);
+    let intervalId;
+    if (timeLeft < 1) {
+      intervalId = setInterval(() => {
+        setTimeLeft(timeLeft - 0.1);
+        playBeep();
+      }, 100);
+    } else if (timeLeft < 3) {
+      intervalId = setInterval(() => {
+        setTimeLeft(timeLeft - 0.2);
+        playBeep();
+      }, 200);
+    } else {
+      intervalId = setInterval(() => {
+        setTimeLeft(timeLeft - 1);
+        playBeep();
+      }, 1000);
+    }
 
     // clear interval on re-render to avoid memory leaks
     return () => clearInterval(intervalId);
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
-  }, [
-    timeLeft,
-    nextQuestion,
-    timerEnabled,
-    gameState,
-    playCountdown,
-    gameIndex,
-  ]);
+  }, [timeLeft, nextQuestion, timerEnabled, gameState, playBeep, gameIndex]);
 
   const renderGame = () => {
     switch (gameState) {
@@ -129,26 +134,17 @@ export const Simulation = () => {
       case "GAME":
         return (
           <>
-            {timerEnabled ? <code>{timeLeft}</code> : ""}
+            {timerEnabled ? <code>{Math.ceil(timeLeft)}</code> : ""}
             <Score
               creditScore={creditScore}
               prevCreditScore={prevCreditScore}
             />
             <h1>{questions[gameIndex].question}</h1>
-            <button
-              onClick={() =>
-                nextQuestion(questions[gameIndex].options[0].value)
-              }
-            >
-              {questions[gameIndex].options[0].answer}
-            </button>
-            <button
-              onClick={() =>
-                nextQuestion(questions[gameIndex].options[1].value)
-              }
-            >
-              {questions[gameIndex].options[1].answer}
-            </button>
+            {questions[gameIndex].options.map((option, index) => (
+              <button onClick={() => nextQuestion(option.value)} key={index}>
+                {option.answer}
+              </button>
+            ))}
           </>
         );
       case "END":
