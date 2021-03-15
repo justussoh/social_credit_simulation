@@ -4,6 +4,8 @@ import { IconButton } from "@material-ui/core";
 import VolumeOffRoundedIcon from "@material-ui/icons/VolumeOffRounded";
 import VolumeUpRoundedIcon from "@material-ui/icons/VolumeUpRounded";
 import TimerOffRoundedIcon from "@material-ui/icons/TimerOffRounded";
+import Timer10RoundedIcon from "@material-ui/icons/Timer10Rounded";
+import Timer3RoundedIcon from "@material-ui/icons/Timer3Rounded";
 import TimerRoundedIcon from "@material-ui/icons/TimerRounded";
 import RadioButtonCheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonUncheckedRounded";
@@ -21,13 +23,18 @@ import "./simulation.css";
 import bgmSfx from "../../common/audio/Tracker.mp3";
 import beepSfx from "../../common/audio/beep.mp3";
 
-const TIMER_LIMIT = 5;
+// const TIMER_LIMIT = 5;
 const INIT_CREDIT_SCORE = 0;
+
+const timerState = [10, 5, 3, false];
 
 export const Simulation = () => {
   // Global Control
   const [soundEnabled, setSoundEnabled] = useStickyState(true, "soundEnabled");
-  const [timerEnabled, setTimerEnabled] = useStickyState(true, "timerEnabled");
+  const [timerEnabled, setTimerEnabled] = useStickyState(
+    timerState[1],
+    "timerEnabled"
+  );
   const [sirenEnabled, setSirenEnabled] = useStickyState(true, "sirenEnabled");
   const [hintEnabled] = useStickyState(false, "hintEnabled");
 
@@ -57,7 +64,23 @@ export const Simulation = () => {
   const [timeLeft, setTimeLeft] = useState(0);
 
   const onToggleTimer = () => {
-    setTimerEnabled(!timerEnabled);
+    setTimerEnabled(
+      timerState[(timerState.indexOf(timerEnabled) + 1) % timerState.length]
+    );
+    console.log((timerState.indexOf(timerEnabled) + 1) % timerState.length);
+  };
+
+  const renderTimer = () => {
+    switch (timerEnabled) {
+      case 10:
+        return <Timer10RoundedIcon />;
+      case 5:
+        return <TimerRoundedIcon />;
+      case 3:
+        return <Timer3RoundedIcon />;
+      default:
+        return <TimerOffRoundedIcon />;
+    }
   };
 
   // Siren Control
@@ -79,17 +102,17 @@ export const Simulation = () => {
         setGameState("END");
       } else {
         setGameIndex(gameIndex + 1);
-        setTimeLeft(TIMER_LIMIT);
+        setTimeLeft(timerEnabled);
       }
     },
-    [gameIndex, creditScore]
+    [gameIndex, creditScore, timerEnabled]
   );
 
   useEffect(() => {
     // Don't count if no timer
     if (!timerEnabled || gameState !== "GAME") return;
 
-    if (timeLeft < 0) return nextQuestion(questions[gameIndex].skip);
+    if (timeLeft <= 0) return nextQuestion(questions[gameIndex].skip);
 
     // save intervalId to clear the interval when the
     // component re-renders
@@ -126,7 +149,7 @@ export const Simulation = () => {
             <button
               onClick={() => {
                 setGameState("GAME");
-                setTimeLeft(TIMER_LIMIT);
+                setTimeLeft(timerEnabled);
               }}
             >
               START
@@ -190,7 +213,7 @@ export const Simulation = () => {
           {!soundEnabled ? <VolumeOffRoundedIcon /> : <VolumeUpRoundedIcon />}
         </IconButton>
         <IconButton onClick={onToggleTimer} color="secondary">
-          {!timerEnabled ? <TimerOffRoundedIcon /> : <TimerRoundedIcon />}
+          {renderTimer()}
         </IconButton>
         <IconButton onClick={onToggleSiren} color="secondary">
           {!sirenEnabled ? (

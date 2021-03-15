@@ -1,3 +1,4 @@
+// always have 1 options with max allowable to press
 export const questions = [
   {
     question: "test1",
