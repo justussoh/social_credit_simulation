@@ -10,6 +10,8 @@ import TimerRoundedIcon from "@material-ui/icons/TimerRounded";
 import RadioButtonCheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonUncheckedRounded";
 import FlareRoundedIcon from "@material-ui/icons/FlareRounded";
+import InsertChartOutlinedOutlinedIcon from "@material-ui/icons/InsertChartOutlinedOutlined";
+import InsertChartRoundedIcon from "@material-ui/icons/InsertChartRounded";
 
 import { useStickyState } from "../../common/hooks/useStickyState";
 import { WelcomeModal } from "./welcomeModal";
@@ -23,7 +25,6 @@ import "./simulation.css";
 import bgmSfx from "../../common/audio/Tracker.mp3";
 import beepSfx from "../../common/audio/beep.mp3";
 
-// const TIMER_LIMIT = 5;
 const INIT_CREDIT_SCORE = 0;
 
 const timerState = [10, 5, 3, false];
@@ -37,6 +38,10 @@ export const Simulation = () => {
   );
   const [sirenEnabled, setSirenEnabled] = useStickyState(true, "sirenEnabled");
   const [hintEnabled] = useStickyState(false, "hintEnabled");
+  const [disparityEnabled, setDisparityEnabled] = useStickyState(
+    true,
+    "disparityEnabled"
+  );
 
   // Sound Control
   const [playBgm, { sound: bgm }] = useSound(bgmSfx, {
@@ -86,6 +91,11 @@ export const Simulation = () => {
   // Siren Control
   const onToggleSiren = () => {
     setSirenEnabled(!sirenEnabled);
+  };
+
+  // Disparity Control
+  const onToggleDisparity = () => {
+    setDisparityEnabled(!disparityEnabled);
   };
 
   // Game State
@@ -166,7 +176,8 @@ export const Simulation = () => {
             />
             <h1>{questions[gameIndex].question}</h1>
             {questions[gameIndex].options.map((option, index) => {
-              if (!isBetween(creditScore, option.range)) return "";
+              if (disparityEnabled && !isBetween(creditScore, option.range))
+                return "";
               return (
                 <button onClick={() => nextQuestion(option.value)} key={index}>
                   {option.answer} {hintEnabled ? option.value : ""}
@@ -214,6 +225,13 @@ export const Simulation = () => {
         </IconButton>
         <IconButton onClick={onToggleTimer} color="secondary">
           {renderTimer()}
+        </IconButton>
+        <IconButton onClick={onToggleDisparity} color="secondary">
+          {!disparityEnabled ? (
+            <InsertChartOutlinedOutlinedIcon />
+          ) : (
+            <InsertChartRoundedIcon />
+          )}
         </IconButton>
         <IconButton onClick={onToggleSiren} color="secondary">
           {!sirenEnabled ? (
