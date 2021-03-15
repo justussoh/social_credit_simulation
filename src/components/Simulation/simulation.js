@@ -12,6 +12,9 @@ import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonUnche
 import FlareRoundedIcon from "@material-ui/icons/FlareRounded";
 import InsertChartOutlinedOutlinedIcon from "@material-ui/icons/InsertChartOutlinedOutlined";
 import InsertChartRoundedIcon from "@material-ui/icons/InsertChartRounded";
+import StarOutlineRoundedIcon from "@material-ui/icons/StarOutlineRounded";
+import StarHalfRoundedIcon from "@material-ui/icons/StarHalfRounded";
+import StarRoundedIcon from "@material-ui/icons/StarRounded";
 
 import { useStickyState } from "../../common/hooks/useStickyState";
 import { WelcomeModal } from "./welcomeModal";
@@ -25,8 +28,7 @@ import "./simulation.css";
 import bgmSfx from "../../common/audio/Tracker.mp3";
 import beepSfx from "../../common/audio/beep.mp3";
 
-const INIT_CREDIT_SCORE = 0;
-
+const initialCreditScore = [900, 600, 300];
 const timerState = [10, 5, 3, false];
 
 export const Simulation = () => {
@@ -42,6 +44,10 @@ export const Simulation = () => {
     true,
     "disparityEnabled"
   );
+  const [
+    initialCreditScoreEnabled,
+    setInitialCreditScoreEnabled,
+  ] = useStickyState(initialCreditScore[1], "initialCreditScoreEnabled");
 
   // Sound Control
   const [playBgm, { sound: bgm }] = useSound(bgmSfx, {
@@ -72,7 +78,6 @@ export const Simulation = () => {
     setTimerEnabled(
       timerState[(timerState.indexOf(timerEnabled) + 1) % timerState.length]
     );
-    console.log((timerState.indexOf(timerEnabled) + 1) % timerState.length);
   };
 
   const renderTimer = () => {
@@ -98,11 +103,36 @@ export const Simulation = () => {
     setDisparityEnabled(!disparityEnabled);
   };
 
+  // Initial CreditScore Control
+  const onToggleCreditScore = () => {
+    setInitialCreditScoreEnabled(
+      initialCreditScore[
+        (initialCreditScore.indexOf(initialCreditScoreEnabled) + 1) %
+          initialCreditScore.length
+      ]
+    );
+    setPrevCreditScore(initialCreditScoreEnabled);
+    setCreditScore(initialCreditScoreEnabled);
+  };
+
+  const renderCreditScoreSetting = () => {
+    switch (initialCreditScoreEnabled) {
+      case 900:
+        return <StarRoundedIcon />;
+      case 300:
+        return <StarOutlineRoundedIcon />;
+      default:
+        return <StarHalfRoundedIcon />;
+    }
+  };
+
   // Game State
   const [gameState, setGameState] = useState("START");
   const [gameIndex, setGameIndex] = useState(0);
-  const [creditScore, setCreditScore] = useState(INIT_CREDIT_SCORE);
-  const [prevCreditScore, setPrevCreditScore] = useState(INIT_CREDIT_SCORE);
+  const [creditScore, setCreditScore] = useState(initialCreditScoreEnabled);
+  const [prevCreditScore, setPrevCreditScore] = useState(
+    initialCreditScoreEnabled
+  );
 
   const nextQuestion = useCallback(
     (value) => {
@@ -197,8 +227,8 @@ export const Simulation = () => {
               onClick={() => {
                 setGameState("START");
                 setGameIndex(0);
-                setPrevCreditScore(INIT_CREDIT_SCORE);
-                setCreditScore(INIT_CREDIT_SCORE);
+                setPrevCreditScore(initialCreditScoreEnabled);
+                setCreditScore(initialCreditScoreEnabled);
               }}
             >
               restart
@@ -225,6 +255,13 @@ export const Simulation = () => {
         </IconButton>
         <IconButton onClick={onToggleTimer} color="secondary">
           {renderTimer()}
+        </IconButton>
+        <IconButton
+          onClick={onToggleCreditScore}
+          color="secondary"
+          disabled={gameState === "GAME"}
+        >
+          {renderCreditScoreSetting()}
         </IconButton>
         <IconButton onClick={onToggleDisparity} color="secondary">
           {!disparityEnabled ? (
