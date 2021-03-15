@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import useSound from "use-sound";
-import { useStickyState } from "../../common/hooks/useStickyState";
 import { IconButton } from "@material-ui/core";
 import VolumeOffRoundedIcon from "@material-ui/icons/VolumeOffRounded";
 import VolumeUpRoundedIcon from "@material-ui/icons/VolumeUpRounded";
@@ -10,8 +9,10 @@ import RadioButtonCheckedRoundedIcon from "@material-ui/icons/RadioButtonChecked
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonUncheckedRounded";
 import FlareRoundedIcon from "@material-ui/icons/FlareRounded";
 
+import { useStickyState } from "../../common/hooks/useStickyState";
 import { WelcomeModal } from "./welcomeModal";
 import { Score } from "./score";
+import { isBetween } from "./utils";
 
 import { questions } from "./questions";
 
@@ -28,6 +29,7 @@ export const Simulation = () => {
   const [soundEnabled, setSoundEnabled] = useStickyState(true, "soundEnabled");
   const [timerEnabled, setTimerEnabled] = useStickyState(true, "timerEnabled");
   const [sirenEnabled, setSirenEnabled] = useStickyState(true, "sirenEnabled");
+  const [hintEnabled] = useStickyState(false, "hintEnabled");
 
   // Sound Control
   const [playBgm, { sound: bgm }] = useSound(bgmSfx, {
@@ -94,18 +96,18 @@ export const Simulation = () => {
     let intervalId;
     if (timeLeft < 1) {
       intervalId = setInterval(() => {
-        setTimeLeft(timeLeft - 0.1);
         playBeep();
+        setTimeLeft(timeLeft - 0.1);
       }, 100);
     } else if (timeLeft < 3) {
       intervalId = setInterval(() => {
-        setTimeLeft(timeLeft - 0.2);
         playBeep();
+        setTimeLeft(timeLeft - 0.2);
       }, 200);
     } else {
       intervalId = setInterval(() => {
-        setTimeLeft(timeLeft - 1);
         playBeep();
+        setTimeLeft(timeLeft - 1);
       }, 1000);
     }
 
@@ -140,11 +142,14 @@ export const Simulation = () => {
               prevCreditScore={prevCreditScore}
             />
             <h1>{questions[gameIndex].question}</h1>
-            {questions[gameIndex].options.map((option, index) => (
-              <button onClick={() => nextQuestion(option.value)} key={index}>
-                {option.answer}
-              </button>
-            ))}
+            {questions[gameIndex].options.map((option, index) => {
+              if (!isBetween(creditScore, option.range)) return "";
+              return (
+                <button onClick={() => nextQuestion(option.value)} key={index}>
+                  {option.answer} {hintEnabled ? option.value : ""}
+                </button>
+              );
+            })}
           </>
         );
       case "END":
