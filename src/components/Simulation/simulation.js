@@ -199,10 +199,11 @@ export const Simulation = () => {
       case "GAME":
         return (
           <>
-            <Score
-              creditScore={creditScore}
-              prevCreditScore={prevCreditScore}
-            />
+            {timerEnabled ? (
+              <code className="timer">{Math.ceil(timeLeft)}</code>
+            ) : (
+              ""
+            )}
             <h1>{questions[gameIndex].question}</h1>
             {questions[gameIndex].options.map((option, index) => {
               if (disparityEnabled && !isBetween(creditScore, option.range))
@@ -213,6 +214,12 @@ export const Simulation = () => {
                 </button>
               );
             })}
+            <div className="score-position">
+              <Score
+                creditScore={creditScore}
+                prevCreditScore={prevCreditScore}
+              />
+            </div>
           </>
         );
       case "END":
@@ -247,11 +254,11 @@ export const Simulation = () => {
       ) : (
         ""
       )}
-      {gameState === "GAME" && timerEnabled ? (
+      {/* {gameState === "GAME" && timerEnabled ? (
         <code className="timer">{Math.ceil(timeLeft)}</code>
       ) : (
         ""
-      )}
+      )} */}
       <div className="level-2">{renderGame()}</div>
       <div className="level-2 settings">
         <IconButton onClick={onMute} color="primary">

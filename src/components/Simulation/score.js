@@ -1,6 +1,6 @@
 export const Score = ({ creditScore, prevCreditScore }) => {
   return (
-    <h3
+    <code
       className={` ${
         creditScore < prevCreditScore
           ? "lower-score"
@@ -9,6 +9,6 @@ export const Score = ({ creditScore, prevCreditScore }) => {
       `}
     >
       {creditScore}
-    </h3>
+    </code>
   );
 };
