@@ -27,6 +27,15 @@
   right: 32px;
 }
 
+.timer {
+  position: absolute;
+  font-size: 128px;
+  top: 128px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.25;
+}
+
 .settings{
   position: absolute;
   bottom: 32px;
@@ -34,11 +43,11 @@
 }
 
 .lower-score{
-  color: red;
+  color: #ffb000;
 }
 
 .higher-score{
-  color: green;
+  color: #66ff66;
 }
 
 

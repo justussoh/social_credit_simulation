@@ -60,7 +60,7 @@ export const Simulation = () => {
     },
     interrupt: true,
     mute: !soundEnabled,
-    volume: 0.4,
+    volume: 0.5,
   });
   const [playBeep] = useSound(beepSfx, {
     volume: 0.5,
@@ -111,8 +111,6 @@ export const Simulation = () => {
           initialCreditScore.length
       ]
     );
-    setPrevCreditScore(initialCreditScoreEnabled);
-    setCreditScore(initialCreditScoreEnabled);
   };
 
   const renderCreditScoreSetting = () => {
@@ -190,6 +188,8 @@ export const Simulation = () => {
               onClick={() => {
                 setGameState("GAME");
                 setTimeLeft(timerEnabled);
+                setPrevCreditScore(initialCreditScoreEnabled);
+                setCreditScore(initialCreditScoreEnabled);
               }}
             >
               START
@@ -199,7 +199,6 @@ export const Simulation = () => {
       case "GAME":
         return (
           <>
-            {timerEnabled ? <code>{Math.ceil(timeLeft)}</code> : ""}
             <Score
               creditScore={creditScore}
               prevCreditScore={prevCreditScore}
@@ -248,29 +247,34 @@ export const Simulation = () => {
       ) : (
         ""
       )}
+      {gameState === "GAME" && timerEnabled ? (
+        <code className="timer">{Math.ceil(timeLeft)}</code>
+      ) : (
+        ""
+      )}
       <div className="level-2">{renderGame()}</div>
       <div className="level-2 settings">
-        <IconButton onClick={onMute} color="secondary">
+        <IconButton onClick={onMute} color="primary">
           {!soundEnabled ? <VolumeOffRoundedIcon /> : <VolumeUpRoundedIcon />}
         </IconButton>
-        <IconButton onClick={onToggleTimer} color="secondary">
+        <IconButton onClick={onToggleTimer} color="primary">
           {renderTimer()}
         </IconButton>
         <IconButton
           onClick={onToggleCreditScore}
-          color="secondary"
+          color="primary"
           disabled={gameState === "GAME"}
         >
           {renderCreditScoreSetting()}
         </IconButton>
-        <IconButton onClick={onToggleDisparity} color="secondary">
+        <IconButton onClick={onToggleDisparity} color="primary">
           {!disparityEnabled ? (
             <InsertChartOutlinedOutlinedIcon />
           ) : (
             <InsertChartRoundedIcon />
           )}
         </IconButton>
-        <IconButton onClick={onToggleSiren} color="secondary">
+        <IconButton onClick={onToggleSiren} color="primary">
           {!sirenEnabled ? (
             <RadioButtonUncheckedRoundedIcon />
           ) : (
