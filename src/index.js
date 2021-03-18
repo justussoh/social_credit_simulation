@@ -7,8 +7,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./theme/theme";
 
-import "augmented-ui/augmented-ui.css";
-
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
