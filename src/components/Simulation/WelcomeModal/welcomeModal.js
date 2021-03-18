@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "@material-ui/core/Modal";
+import { OptionButton } from "../Option/option";
 
 import "./welcomeModal.css";
 
@@ -18,7 +19,14 @@ export const WelcomeModal = () => {
           Attention
         </div>
       </div>
-      <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+      <div className="disclaimer">
+        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+      </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <OptionButton onClick={handleClose} className="start-button">
+          ACCEPT
+        </OptionButton>
+      </div>
     </div>
   );
 

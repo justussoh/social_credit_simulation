@@ -19,6 +19,7 @@ import { useHistory } from "react-router-dom";
 
 import { useStickyState } from "../../common/hooks/useStickyState";
 import { WelcomeModal } from "./WelcomeModal/welcomeModal";
+import { CRT } from "./CRT/crt";
 import { Score } from "./score";
 import { isBetween } from "./utils";
 import { OptionButton } from "./Option/option";
@@ -270,7 +271,7 @@ export const Simulation = () => {
   };
 
   return (
-    <header className="App-header">
+    <CRT>
       {sirenEnabled && gameState === "GAME" ? (
         <div className="siren level-1" />
       ) : (
@@ -307,6 +308,6 @@ export const Simulation = () => {
         </div>
       )}
       <WelcomeModal />
-    </header>
+    </CRT>
   );
 };

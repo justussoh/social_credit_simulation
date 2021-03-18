@@ -16,8 +16,7 @@ export const OptionButton = ({
       data-augmented-ui={`border ${augmentedUi}`}
       {...props}
     >
-      {children}
-      {hintEnabled && hint ? <code>{hint}</code> : ""}
+      {children} {hintEnabled && hint ? <code>({hint})</code> : ""}
     </div>
   );
 };

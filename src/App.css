@@ -4,7 +4,7 @@
 
 .App-header {
   position: relative;
-  background-color: #000;
+  background-color: #05321e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,4 +12,5 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  overflow-y: hidden;
 }
