@@ -28,7 +28,7 @@ import { questions } from "./questions";
 
 import "./simulation.css";
 
-import bgmSfx from "../../common/audio/Tracker.mp3";
+import bgmSfx from "../../common/audio/bgm.mp3";
 import beepSfx from "../../common/audio/beep.mp3";
 
 const initialCreditScore = [900, 600, 300];
