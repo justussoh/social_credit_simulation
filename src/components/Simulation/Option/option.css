@@ -1,0 +1,28 @@
+div[class*='option-button']{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 20vw;
+  padding: 10px;
+  text-align: center;
+  --aug-border: initial;
+}
+
+div[class*="start-button"]{
+  --aug-clip-br1: initial;
+  --aug-br1: 1.25rem;
+  --aug-border-bg: #fefefe;
+}
+
+div[class*="about-button"]{
+  --aug-clip-tl1: initial;
+  --aug-tl1: 1.25rem;
+  --aug-border-bg: #fefefe;
+}
+
+div[class*='option-button']:hover{
+  --aug-border-bg: #33ff33;
+  color: #33ff33;
+  cursor: pointer;
+}

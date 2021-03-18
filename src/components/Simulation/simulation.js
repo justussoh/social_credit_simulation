@@ -15,11 +15,13 @@ import InsertChartRoundedIcon from "@material-ui/icons/InsertChartRounded";
 import StarOutlineRoundedIcon from "@material-ui/icons/StarOutlineRounded";
 import StarHalfRoundedIcon from "@material-ui/icons/StarHalfRounded";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
+import { useHistory } from "react-router-dom";
 
 import { useStickyState } from "../../common/hooks/useStickyState";
-import { WelcomeModal } from "./welcomeModal";
+import { WelcomeModal } from "./WelcomeModal/welcomeModal";
 import { Score } from "./score";
 import { isBetween } from "./utils";
+import { OptionButton } from "./Option/option";
 
 import { questions } from "./questions";
 
@@ -48,6 +50,9 @@ export const Simulation = () => {
     initialCreditScoreEnabled,
     setInitialCreditScoreEnabled,
   ] = useStickyState(initialCreditScore[1], "initialCreditScoreEnabled");
+
+  // Routing
+  const history = useHistory();
 
   // Sound Control
   const [playBgm, { sound: bgm }] = useSound(bgmSfx, {
@@ -146,6 +151,14 @@ export const Simulation = () => {
     [gameIndex, creditScore, timerEnabled]
   );
 
+  const startGame = () => {
+    setGameState("GAME");
+    setGameIndex(0);
+    setTimeLeft(timerEnabled);
+    setPrevCreditScore(initialCreditScoreEnabled);
+    setCreditScore(initialCreditScoreEnabled);
+  };
+
   useEffect(() => {
     // Don't count if no timer
     if (!timerEnabled || gameState !== "GAME") return;
@@ -182,19 +195,17 @@ export const Simulation = () => {
     switch (gameState) {
       case "START":
         return (
-          <>
-            Simulation
-            <button
-              onClick={() => {
-                setGameState("GAME");
-                setTimeLeft(timerEnabled);
-                setPrevCreditScore(initialCreditScoreEnabled);
-                setCreditScore(initialCreditScoreEnabled);
-              }}
-            >
-              START
-            </button>
-          </>
+          <div
+            className="title-header"
+            data-augmented-ui="tl-clip br-clip both"
+          >
+            <span style={{ marginTop: "auto" }}>Simulation</span>
+            <div className="start-button-container">
+              <OptionButton onClick={startGame} className="start-button">
+                START
+              </OptionButton>
+            </div>
+          </div>
         );
       case "GAME":
         return (
@@ -204,6 +215,7 @@ export const Simulation = () => {
             ) : (
               ""
             )}
+            <RadioButtonCheckedRoundedIcon className="blink red-record" />
             <h1>{questions[gameIndex].question}</h1>
             {questions[gameIndex].options.map((option, index) => {
               if (disparityEnabled && !isBetween(creditScore, option.range))
@@ -225,20 +237,31 @@ export const Simulation = () => {
       case "END":
         return (
           <>
-            <Score
-              creditScore={creditScore}
-              prevCreditScore={prevCreditScore}
-            />
-            <button
-              onClick={() => {
-                setGameState("START");
-                setGameIndex(0);
-                setPrevCreditScore(initialCreditScoreEnabled);
-                setCreditScore(initialCreditScoreEnabled);
-              }}
-            >
-              restart
-            </button>
+            <div className="end-score">
+              <Score
+                creditScore={creditScore}
+                prevCreditScore={prevCreditScore}
+              />
+            </div>
+            <div className="multi-button-container">
+              <OptionButton
+                onClick={() => {
+                  history.push("/about");
+                }}
+                className="about-button"
+              >
+                ABOUT
+              </OptionButton>
+
+              <OptionButton
+                onClick={() => {
+                  setGameState("START");
+                }}
+                className="start-button"
+              >
+                RESTART
+              </OptionButton>
+            </div>
           </>
         );
       default:
@@ -248,47 +271,41 @@ export const Simulation = () => {
 
   return (
     <header className="App-header">
-      {sirenEnabled ? <div className="siren level-1" /> : ""}
-      {gameState === "GAME" ? (
-        <RadioButtonCheckedRoundedIcon className="blink red-record" />
+      {sirenEnabled && gameState === "GAME" ? (
+        <div className="siren level-1" />
       ) : (
         ""
       )}
-      {/* {gameState === "GAME" && timerEnabled ? (
-        <code className="timer">{Math.ceil(timeLeft)}</code>
-      ) : (
-        ""
-      )} */}
       <div className="level-2">{renderGame()}</div>
-      <div className="level-2 settings">
-        <IconButton onClick={onMute} color="primary">
-          {!soundEnabled ? <VolumeOffRoundedIcon /> : <VolumeUpRoundedIcon />}
-        </IconButton>
-        <IconButton onClick={onToggleTimer} color="primary">
-          {renderTimer()}
-        </IconButton>
-        <IconButton
-          onClick={onToggleCreditScore}
-          color="primary"
-          disabled={gameState === "GAME"}
-        >
-          {renderCreditScoreSetting()}
-        </IconButton>
-        <IconButton onClick={onToggleDisparity} color="primary">
-          {!disparityEnabled ? (
-            <InsertChartOutlinedOutlinedIcon />
-          ) : (
-            <InsertChartRoundedIcon />
-          )}
-        </IconButton>
-        <IconButton onClick={onToggleSiren} color="primary">
-          {!sirenEnabled ? (
-            <RadioButtonUncheckedRoundedIcon />
-          ) : (
-            <FlareRoundedIcon />
-          )}
-        </IconButton>
-      </div>
+      {gameState === "GAME" ? (
+        ""
+      ) : (
+        <div className="level-2 settings">
+          <IconButton onClick={onMute} color="primary">
+            {!soundEnabled ? <VolumeOffRoundedIcon /> : <VolumeUpRoundedIcon />}
+          </IconButton>
+          <IconButton onClick={onToggleTimer} color="primary">
+            {renderTimer()}
+          </IconButton>
+          <IconButton onClick={onToggleCreditScore} color="primary">
+            {renderCreditScoreSetting()}
+          </IconButton>
+          <IconButton onClick={onToggleDisparity} color="primary">
+            {!disparityEnabled ? (
+              <InsertChartOutlinedOutlinedIcon />
+            ) : (
+              <InsertChartRoundedIcon />
+            )}
+          </IconButton>
+          <IconButton onClick={onToggleSiren} color="primary">
+            {!sirenEnabled ? (
+              <RadioButtonUncheckedRoundedIcon />
+            ) : (
+              <FlareRoundedIcon />
+            )}
+          </IconButton>
+        </div>
+      )}
       <WelcomeModal />
     </header>
   );

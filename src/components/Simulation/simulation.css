@@ -9,6 +9,36 @@
   width: 100vw;
   height: 100vh;
   opacity: 0.15;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+div[class*="title-header"]{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  height: 50vh;
+  --aug-border-all: 5px;
+  --aug-inlay-all: 10px;
+  padding: 15px; 
+  text-align: center;
+  --aug-border-bg: #33ff33;
+  --aug-inset-bg: #fefefe;
+  --aug-inlay-opacity: 0.25;
+  --aug-tl: 32px;
+  --aug-br: 32px;
+}
+
+.start-button-container{
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.about-button{
+ margin-right: 10px;
 }
 
 .level-1{
@@ -42,7 +72,15 @@
   bottom: 0px;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0.25;
+  opacity: 0.5;
+}
+
+.end-score{
+  font-size: 128px;
+}
+
+.multi-button-container{
+  display: flex;
 }
 
 .settings{
