@@ -19,6 +19,14 @@ export const questions = [
           maxScore: 100,
         },
       },
+      {
+        answer: "answer 3",
+        value: -50,
+        range: {
+          minScore: 0,
+          maxScore: 100,
+        },
+      },
     ],
     skip: 10,
   },

@@ -98,6 +98,11 @@ div[class*="title-header"]{
   color: #66ff66;
 }
 
+.answer-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 @keyframes blinker {
   50% {

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import useSound from "use-sound";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Grid } from "@material-ui/core";
 import VolumeOffRoundedIcon from "@material-ui/icons/VolumeOffRounded";
 import VolumeUpRoundedIcon from "@material-ui/icons/VolumeUpRounded";
 import TimerOffRoundedIcon from "@material-ui/icons/TimerOffRounded";
@@ -42,7 +42,7 @@ export const Simulation = () => {
     "timerEnabled"
   );
   const [sirenEnabled, setSirenEnabled] = useStickyState(true, "sirenEnabled");
-  const [hintEnabled] = useStickyState(false, "hintEnabled");
+  useStickyState(false, "hintEnabled");
   const [disparityEnabled, setDisparityEnabled] = useStickyState(
     true,
     "disparityEnabled"
@@ -55,8 +55,12 @@ export const Simulation = () => {
   // Routing
   const history = useHistory();
 
+  history.listen(() => {
+    stopBgm();
+  });
+
   // Sound Control
-  const [playBgm, { sound: bgm }] = useSound(bgmSfx, {
+  const [playBgm, { stop: stopBgm, sound: bgm }] = useSound(bgmSfx, {
     autoplay: true,
     loop: true,
     onplayerror: function () {
@@ -218,15 +222,29 @@ export const Simulation = () => {
             )}
             <RadioButtonCheckedRoundedIcon className="blink red-record" />
             <h1>{questions[gameIndex].question}</h1>
-            {questions[gameIndex].options.map((option, index) => {
-              if (disparityEnabled && !isBetween(creditScore, option.range))
-                return "";
-              return (
-                <button onClick={() => nextQuestion(option.value)} key={index}>
-                  {option.answer} {hintEnabled ? option.value : ""}
-                </button>
-              );
-            })}
+            <Grid container spacing={2}>
+              {questions[gameIndex].options.map((option, index) => {
+                if (disparityEnabled && !isBetween(creditScore, option.range))
+                  return "";
+                return (
+                  <Grid
+                    item
+                    key={index}
+                    sm={12 / questions[gameIndex].options.length}
+                    xs={12}
+                    className="answer-container"
+                  >
+                    <OptionButton
+                      onClick={() => nextQuestion(option.value)}
+                      hint={option.value}
+                      key={index}
+                    >
+                      {option.answer}
+                    </OptionButton>
+                  </Grid>
+                );
+              })}
+            </Grid>
             <div className="score-position">
               <Score
                 creditScore={creditScore}

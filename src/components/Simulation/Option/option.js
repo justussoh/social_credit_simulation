@@ -3,9 +3,9 @@ import { useStickyState } from "../../../common/hooks/useStickyState";
 
 export const OptionButton = ({
   hint,
-  className,
+  className = "",
   children,
-  augmentedUi,
+  augmentedUi = "",
   ...props
 }) => {
   const [hintEnabled] = useStickyState(false, "hintEnabled");
