@@ -18,16 +18,16 @@ export const OptionButton = ({
       {...props}
     >
       {children}{" "}
-      {wealth && (
+      {!hintEnabled && wealth && (
         <code>
           ({wealth > 0 ? "+" : "-"}${Math.abs(wealth)})
         </code>
       )}
-      {hintEnabled && (hint || wealth) ? (
+      {hintEnabled && (hint !== undefined || wealth !== undefined) ? (
         <code>
           ({hint > 0 ? "+" : ""}
           {hint},{" "}
-          {wealth ? `${wealth > 0 ? "+" : "-"}$${Math.abs(wealth)}` : "$0"} )
+          {wealth ? `${wealth > 0 ? "+" : "-"}$${Math.abs(wealth)}` : "$0"})
         </code>
       ) : (
         ""

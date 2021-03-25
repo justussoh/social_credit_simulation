@@ -24,7 +24,7 @@ export const Score = ({
         }
       `}
       >
-        ${wealthScore}
+        {wealthScore > 0 ? "" : "-"}${Math.abs(wealthScore)}
       </span>
     </code>
   );

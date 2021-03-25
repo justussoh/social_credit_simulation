@@ -188,7 +188,7 @@ export const questions = [
       },
       {
         answer: "Accept the fine",
-        value: 10,
+        value: -10,
         wealth: -100,
       },
       {
@@ -215,7 +215,7 @@ export const questions = [
       {
         answer: "No, someone else can take the job",
         value: -30,
-        wealth: -100,
+        wealth: 100,
       },
       {
         answer:
@@ -654,11 +654,11 @@ export const questions = [
       },
       {
         answer: "6 – 10",
-        value: -10,
+        value: -5,
       },
       {
         answer: "11 and above",
-        value: -20,
+        value: -10,
       },
     ],
     skip: 50,

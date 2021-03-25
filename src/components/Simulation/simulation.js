@@ -144,7 +144,7 @@ export const Simulation = () => {
   const nextQuestion = useCallback(
     (option) => {
       // only add to score if wealth >0
-      if (wealthScore > 0) {
+      if (wealthScore > 0 || option.value < 0) {
         //score can only be between 0 and 1500
         let newScore = creditScore + option.value;
         if (newScore < 0) {
