@@ -146,8 +146,11 @@ export const Simulation = () => {
 
   const nextQuestion = useCallback(
     (option) => {
-      setPrevCreditScore(creditScore);
-      setCreditScore(creditScore + option.value);
+      // only add to score if wealth >0
+      if (wealthScore > 0) {
+        setPrevCreditScore(creditScore);
+        setCreditScore(creditScore + option.value);
+      }
 
       // reduce wealth if applicable
       if (option.wealth) {
