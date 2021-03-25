@@ -1,10 +1,12 @@
 import "./crt.css";
 
-export const CRT = ({ children }) => {
+export const CRT = ({ children, state }) => {
   return (
-    <header className="App-header">
-      <div className="scanline" />
-      <div className="crt">{children}</div>
+    <header className={`App-header `}>
+      {state !== "GAME" ? <div className="scanline" /> : ""}
+      <div className={`crt ${state !== "GAME" ? "crt-text-shadow" : ""}`}>
+        {children}
+      </div>
     </header>
   );
 };

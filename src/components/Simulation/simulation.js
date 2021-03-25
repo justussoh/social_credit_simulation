@@ -23,6 +23,7 @@ import { CRT } from "./CRT/crt";
 import { Score } from "./score";
 import { isBetween } from "./utils";
 import { OptionButton } from "./Option/option";
+import { Wall } from "./SurveillanceWall/SurveillanceWall";
 
 import { questions } from "./questions";
 
@@ -220,7 +221,6 @@ export const Simulation = () => {
             ) : (
               ""
             )}
-            <RadioButtonCheckedRoundedIcon className="blink red-record" />
             <h1>{questions[gameIndex].question}</h1>
             <Grid container spacing={2}>
               {questions[gameIndex].options.map((option, index) => {
@@ -251,6 +251,8 @@ export const Simulation = () => {
                 prevCreditScore={prevCreditScore}
               />
             </div>
+            <RadioButtonCheckedRoundedIcon className="blink red-record" />
+            <Wall />
           </>
         );
       case "END":
@@ -289,7 +291,7 @@ export const Simulation = () => {
   };
 
   return (
-    <CRT>
+    <CRT state={gameState}>
       {sirenEnabled && gameState === "GAME" ? (
         <div className="siren level-1" />
       ) : (
