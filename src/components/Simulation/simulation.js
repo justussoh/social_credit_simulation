@@ -148,8 +148,15 @@ export const Simulation = () => {
     (option) => {
       // only add to score if wealth >0
       if (wealthScore > 0) {
+        //score can only be between 0 and 1500
+        let newScore = creditScore + option.value;
+        if (newScore < 0) {
+          newScore = 0;
+        } else if (newScore > 1500) {
+          newScore = 1500;
+        }
         setPrevCreditScore(creditScore);
-        setCreditScore(creditScore + option.value);
+        setCreditScore(newScore);
       }
 
       // reduce wealth if applicable
