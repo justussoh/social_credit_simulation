@@ -1207,7 +1207,7 @@ export const questions = [
         value: -5,
       },
       {
-        answer: "Slow down an/d prepare to stop",
+        answer: "Slow down and prepare to stop",
         value: 10,
       },
     ],
@@ -1218,11 +1218,11 @@ export const questions = [
       "You are driving a grab and the  passenger offers to tip you to stop in front of the building, which is illegal, do you:",
     options: [
       {
-        answer: "Receive the abd review",
+        answer: "Receive the bad review",
         value: -10,
       },
       {
-        answer: "make the illegal stop",
+        answer: "Make the illegal stop",
         value: -20,
       },
     ],

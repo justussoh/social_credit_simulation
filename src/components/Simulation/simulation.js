@@ -4,9 +4,6 @@ import { IconButton, Grid, Container } from "@material-ui/core";
 import VolumeOffRoundedIcon from "@material-ui/icons/VolumeOffRounded";
 import VolumeUpRoundedIcon from "@material-ui/icons/VolumeUpRounded";
 import TimerOffRoundedIcon from "@material-ui/icons/TimerOffRounded";
-import Timer10RoundedIcon from "@material-ui/icons/Timer10Rounded";
-import Timer3RoundedIcon from "@material-ui/icons/Timer3Rounded";
-import TimerRoundedIcon from "@material-ui/icons/TimerRounded";
 import RadioButtonCheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonUncheckedRounded";
 import FlareRoundedIcon from "@material-ui/icons/FlareRounded";
@@ -35,7 +32,7 @@ import beepSfx from "../../common/audio/beep.mp3";
 const INITIAL_CREDIT_SCORE = 600;
 
 const initialWealth = [900, 600, 300];
-const timerState = [10, 5, 3, false];
+const timerState = [15, 10, 5, false];
 
 export const Simulation = () => {
   // Global Control
@@ -95,12 +92,12 @@ export const Simulation = () => {
 
   const renderTimer = () => {
     switch (timerEnabled) {
+      case 15:
+        return <div style={{ fontSize: "14px" }}>15s</div>;
       case 10:
-        return <Timer10RoundedIcon />;
+        return <div style={{ fontSize: "14px" }}>10s</div>;
       case 5:
-        return <TimerRoundedIcon />;
-      case 3:
-        return <Timer3RoundedIcon />;
+        return <div style={{ fontSize: "14px" }}>5s</div>;
       default:
         return <TimerOffRoundedIcon />;
     }
