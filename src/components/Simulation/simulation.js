@@ -277,7 +277,7 @@ export const Simulation = () => {
               >
                 1. You will be presented with choices for each question <br />
                 2. Answer each question truthfully <br />
-                3. You have a fixed time to answer each question <br />
+                3. You have a fixed time (10s default) to answer each question <br />
                 4. The outcome of these choices will affect your score <br />
                 5. Option picked is final for the round <br />
                 6. Failing to answer the question will result in a penalty{" "}
@@ -288,7 +288,7 @@ export const Simulation = () => {
                 Social Credit Score - starts off at 600 (default) with a limit
                 at 1300, keep this score as high as possible. <br />
                 <br />
-                Wealth - score starts at 1000 (default) and goes down when you
+                Wealth - score starts at 600 (default) and goes down when you
                 pick a choice that requires payment or makes you unhappy. <br />
                 <br />
                 The objective of the game is to maximize your social credit
