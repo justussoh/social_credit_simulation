@@ -33,6 +33,32 @@ export const About = () => {
               ABOUT THE MECHANICS
             </div>
           </Grid>
+
+          <Grid item xs={12}>
+            <div className="about-title">档案(Dang An)</div>
+            <div className="about-text">
+              档案 refers to record or archive in mandarin. In the past, the
+              档案 contained an individual's academic records, personal
+              information, employment records and photographs. These dossiers
+              help the government keep track of and control its citizens much
+              like the social credit system today. In fact, the monitoring of
+              citizen is seen as a revival of the old system in the digital era
+              to moderate behaviour by filtering the trustworthy from the burden
+              of society. Having a low score could result in having privileges
+              like social service, loans and travel taken away. Having knowledge
+              of the rules will help citizens discern the right from wrong.
+              <br />
+              <br />
+              By putting a score to the rules, the government has effectively
+              gamified law and obedience. Gamification combined with
+              surveillance abstract the weeding functions of the law, shifting
+              the mode of power to one of deterrence and control against certain
+              behavior. Perhaps through playing the simulation, we can see how
+              control and deterrence is establish and how one can win in such a
+              scenario.
+            </div>
+          </Grid>
+
           <Grid item xs={6}>
             <img src={dangan} alt="dangan" className="about-img" />
           </Grid>
