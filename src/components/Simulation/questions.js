@@ -789,19 +789,441 @@ export const questions = [
     skip: 50,
   },
   {
-    question: "Do you believe in any religion?",
+    question: "Do you use Social Media?",
     options: [
       {
-        answer: "Yes",
+        answer: "Yes, whenever I am free ",
+        value: 0,
+      },
+      {
+        answer: "Yes, all the time",
+        value: -10,
+      },
+      {
+        answer: "No, I don’t really have time for that",
+        value: 10,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "You have just encountered 3 train breakdowns in a row on your way home from work. What do you do?",
+    options: [
+      {
+        answer: "Complaint on social media",
+        value: -20,
+      },
+      {
+        answer: "Complain to your close friends",
+        value: -20,
+      },
+      {
+        answer: "Accept and move on with life",
+        value: 0,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "You read an article online speculating about a possible infectious disease, do you:",
+    options: [
+      {
+        answer: "Share it with friends and family",
+        value: -20,
+      },
+      {
+        answer: "Keep the news to yourself and verify the source",
+        value: 10,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "You're going to be late for your lunch date, you accidentally kicked an empty plastic bottle that was already on the floor, do you:",
+    options: [
+      {
+        answer: "Pretend you didn’t see it and continue walking",
+        value: -10,
+      },
+      {
+        answer: "Pick it up and  only throw it in a recycle bin",
+        value: 15,
+      },
+      {
+        answer: "Pick it up and throw it away at the nearest bin",
+        value: 10,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question: "What appears frequently on your social media feed?",
+    options: [
+      {
+        answer: "Parties",
+        value: -10,
+      },
+      {
+        answer: "Family and friends",
+        value: 10,
+      },
+      {
+        answer: "Rants",
+        value: -5,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "Your social media shows that it has been access during work hours, do you:",
+    options: [
+      {
+        answer:
+          "Pay for the consequence and promise not to do it in the future",
+        value: -10,
+      },
+      {
+        answer:
+          "Lie and say you were speaking to your ill mother who is at home",
+        value: -20,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "You see that a friend posted a complaint regarding the incompetency of the government, do you:",
+    options: [
+      {
+        answer: "Pretend that nothing happened",
+        value: -10,
+      },
+      {
+        answer: "Make them to take down the post",
+        value: -5,
+      },
+      {
+        answer: "Report and unfriend the person",
+        value: 10,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question: "How often do you visit your parents?",
+    options: [
+      {
+        answer: "They stay with me",
+        value: 50,
+      },
+      {
+        answer: "I lost contact with my parents",
         value: -30,
       },
       {
-        answer: "No",
+        answer: "I make it an effort to have dinner with them daily",
         value: 30,
       },
+    ],
+    skip: 50,
+  },
+  {
+    question: "You get in an argument with your parents, would you: ",
+    options: [
       {
-        answer: "maybe",
+        answer: "Try to get back on friendly basis",
+        value: 10,
+      },
+      {
+        answer: "Tell them they are going to regret and prolong",
+        value: -10,
+      },
+      {
+        answer: "Cast black look at suitable moments",
+        value: -20,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "Your parents ask you to run errands, but you do not want to, do you:",
+    options: [
+      {
+        answer: "Say no",
+        value: -10,
+      },
+      {
+        answer: "Say yes",
+        value: 10,
+      },
+      {
+        answer: "Get back at them buy intentionally getting something else",
+        value: -20,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question: "Your mother is ill, do you:",
+    options: [
+      {
+        answer:
+          "Carry on with your own life and leave it to the rest of the fam",
+        value: -20,
+      },
+      {
+        answer: "Cope and hope she will get better soon",
+        value: 10,
+        wealth: -50,
+      },
+      {
+        answer:
+          "Wait, my credit score allows me to get shorter wait times at the clinic for my mother!",
         value: 30,
+        wealth: -50,
+        range: {
+          minScore: 800,
+          maxScore: 1500,
+        },
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question: "You parents are asking for a retirement allowance, do you:",
+    options: [
+      {
+        answer: "Lie to them on how much you earn",
+        value: -20,
+        wealth: -50,
+      },
+      {
+        answer: "Oblige without resentment",
+        value: 10,
+        wealth: -100,
+      },
+      {
+        answer: "Tell them no",
+        value: -10,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "Your brother asked you for a loan to start a local business, would you: ",
+    options: [
+      {
+        answer: "Tell him that you cannot help",
+        value: -10,
+      },
+      {
+        answer: "Give him a sum of money",
+        value: 10,
+        wealth: -50,
+      },
+      {
+        answer: "Loan him a sum of money but charge a high interest rate",
+        value: -5,
+        wealth: -30,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question: "You need to enrol your child for public schooling, do you:",
+    options: [
+      {
+        answer: "Donate more money for a higher chance to get in",
+        value: 20,
+        wealth: -50,
+        range: {
+          minScore: 400,
+          maxScore: 1500,
+        },
+      },
+      {
+        answer: "You are illegible for public schooling!",
+        value: 0,
+      },
+      {
+        answer: "Oh, my credit score gives me priority in school admission!",
+        value: 20,
+        wealth: -20,
+        range: {
+          minScore: 800,
+          maxScore: 1500,
+        },
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "You have been busy at work and neglected your role as a parent, your children want to spend time with you, do you:",
+    options: [
+      {
+        answer: "Tell them that you are busy",
+        value: -20,
+      },
+      {
+        answer: "Spend time with them",
+        value: 20,
+      },
+      {
+        answer: "Give them money to get something they want",
+        value: 0,
+        wealth: -20,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "Your children got into a fight at school for defending your nationality as Singaporeans, do you:",
+    options: [
+      {
+        answer: "Teach your child to tell a white lie",
+        value: -30,
+      },
+      {
+        answer: "Tell the teachers that your child was right",
+        value: -20,
+      },
+      {
+        answer:
+          "Give the teacher a red packet and hope that they keep the matter private",
+        value: -5,
+        wealth: -50,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "You see an elderly lady trying to cross the road but there are no traffic lights in sight, would you help her cross the road?",
+    options: [
+      {
+        answer: "Yes, after check that there are no cars",
+        value: 20,
+      },
+      {
+        answer: "No, I would leave her alone",
+        value: -10,
+      },
+      {
+        answer: "No, I would tell her that crossing there is illegal",
+        value: -20,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "You are at a party and you had a tiny bit alcohol due to peer pressure, would you continue to drive home?",
+    options: [
+      {
+        answer: "Yes, I have never been caught by the traffic police anyway",
+        value: -10,
+      },
+      {
+        answer:
+          "No, Ill pay the overnight fees and come back for my car the next day",
+        value: 10,
+        wealth: -20,
+      },
+      {
+        answer:
+          "No, Ill take the public transport, my credit score allows for cheaper transportation fees",
+        value: 20,
+        range: {
+          minScore: 800,
+          maxScore: 1500,
+        },
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "It has been a long day and you are dying to get home, but the speed limit on the highway suggest you drive at 70km/hr, do you:",
+    options: [
+      {
+        answer:
+          "Travel faster than the speed limit as it would be difficult to get found out",
+        value: -10,
+      },
+      {
+        answer: "Keep to the speed limit",
+        value: 10,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question: "You receive an urgent text from work while driving, do you:",
+    options: [
+      {
+        answer: "Pull over and text",
+        value: 0,
+      },
+      {
+        answer: "Reply while driving",
+        value: -20,
+      },
+      {
+        answer: "Ignore the text and deal with it later",
+        value: 10,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "You are rushing for an important deal, but you missed your turn, and you know that the next U-turn is 3 minutes away, do you:",
+    options: [
+      {
+        answer: "Make an illegal U-turn",
+        value: -10,
+      },
+      {
+        answer: "Do the right thing but be late and lose the deal",
+        value: 10,
+        wealth: -50,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question: "When you see an amber light, do you:",
+    options: [
+      {
+        answer: "Step on the gas",
+        value: -5,
+      },
+      {
+        answer: "Slow down an/d prepare to stop",
+        value: 10,
+      },
+    ],
+    skip: 50,
+  },
+  {
+    question:
+      "You are driving a grab and the  passenger offers to tip you to stop in front of the building, which is illegal, do you:",
+    options: [
+      {
+        answer: "Receive the abd review",
+        value: -10,
+      },
+      {
+        answer: "make the illegal stop",
+        value: -20,
       },
     ],
     skip: 50,
