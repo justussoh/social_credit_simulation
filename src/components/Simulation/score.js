@@ -1,14 +1,31 @@
-export const Score = ({ creditScore, prevCreditScore }) => {
+export const Score = ({
+  creditScore,
+  prevCreditScore,
+  wealthScore,
+  prevWealthScore,
+}) => {
   return (
-    <code
-      className={` ${
-        creditScore < prevCreditScore
-          ? "lower-score"
-          : `${creditScore === prevCreditScore ? "" : "higher-score"}`
-      }
+    <code>
+      <span
+        className={` ${
+          creditScore < prevCreditScore
+            ? "lower-score"
+            : `${creditScore === prevCreditScore ? "" : "higher-score"}`
+        }
       `}
-    >
-      {creditScore}
+      >
+        {creditScore}
+      </span>{" "}
+      <span
+        className={` ${
+          wealthScore < prevWealthScore
+            ? "lower-score"
+            : `${wealthScore === prevWealthScore ? "" : "higher-score"}`
+        }
+      `}
+      >
+        ${wealthScore}
+      </span>
     </code>
   );
 };

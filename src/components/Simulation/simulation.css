@@ -104,6 +104,10 @@ div[class*="rules-header"]{
   justify-content: center;
 }
 
+.game-opacity{
+  opacity: 1 !important;
+}
+
 .settings{
   position: absolute;
   bottom: 32px;

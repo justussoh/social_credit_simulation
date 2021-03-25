@@ -1,77 +1,54 @@
 // always have 1 options with max allowable to press
 export const questions = [
   {
-    question: "test1",
+    question: "What is your highest education background?",
     options: [
       {
-        answer: "answer 1",
+        answer: "Bachelor’s Degree or equivalent and above ",
+        value: 150,
+      },
+      {
+        answer: "Diploma or equivalent ",
         value: 100,
         range: {
           minScore: 0,
-          maxScore: 100,
+          maxScore: 1500,
         },
       },
       {
-        answer: "answer 2",
+        answer: "Others",
         value: -50,
         range: {
           minScore: 0,
-          maxScore: 100,
-        },
-      },
-      {
-        answer: "answer 3",
-        value: -50,
-        range: {
-          minScore: 0,
-          maxScore: 100,
+          maxScore: 1500,
         },
       },
     ],
-    skip: 10,
+    skip: 50,
   },
   {
-    question: "test2",
+    question:
+      "You and your friends are caught in a group of 9 (which is larger than the allowable meeting size), would you:",
     options: [
       {
-        answer: "answer 1",
-        value: 100,
-        range: {
-          minScore: 100,
-          maxScore: 200,
-        },
+        answer: "Lie to the officer that there are 2 separate groups",
+        value: -30,
       },
       {
-        answer: "answer 2",
-        value: -50,
+        answer: "Accept the fine",
+        value: 10,
+        wealth: -100,
+      },
+      {
+        answer:
+          "Disperse and act as if nothing happened given benefit of doubt from good credit",
+        value: 0,
         range: {
-          minScore: 0,
-          maxScore: 100,
+          minScore: 800,
+          maxScore: 1500,
         },
       },
     ],
-    skip: 10,
-  },
-  {
-    question: "test3",
-    options: [
-      {
-        answer: "answer 1",
-        value: 100,
-        range: {
-          minScore: 0,
-          maxScore: 100,
-        },
-      },
-      {
-        answer: "answer 2",
-        value: -50,
-        range: {
-          minScore: 0,
-          maxScore: 100,
-        },
-      },
-    ],
-    skip: 0,
+    skip: 50,
   },
 ];

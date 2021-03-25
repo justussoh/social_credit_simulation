@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import useSound from "use-sound";
-import { IconButton, Grid } from "@material-ui/core";
+import { IconButton, Grid, Container } from "@material-ui/core";
 import VolumeOffRoundedIcon from "@material-ui/icons/VolumeOffRounded";
 import VolumeUpRoundedIcon from "@material-ui/icons/VolumeUpRounded";
 import TimerOffRoundedIcon from "@material-ui/icons/TimerOffRounded";
@@ -32,7 +32,9 @@ import "./simulation.css";
 import bgmSfx from "../../common/audio/bgm.mp3";
 import beepSfx from "../../common/audio/beep.mp3";
 
-const initialCreditScore = [900, 600, 300];
+const INITIAL_CREDIT_SCORE = 600;
+
+const initialWealth = [900, 600, 300];
 const timerState = [10, 5, 3, false];
 
 export const Simulation = () => {
@@ -48,10 +50,10 @@ export const Simulation = () => {
     true,
     "disparityEnabled"
   );
-  const [
-    initialCreditScoreEnabled,
-    setInitialCreditScoreEnabled,
-  ] = useStickyState(initialCreditScore[1], "initialCreditScoreEnabled");
+  const [initialWealthEnabled, setInitialWealthEnabled] = useStickyState(
+    initialWealth[1],
+    "initialWealthEnabled"
+  );
 
   // Routing
   const history = useHistory();
@@ -116,19 +118,18 @@ export const Simulation = () => {
 
   // Initial CreditScore Control
   const onToggleCreditScore = () => {
-    setInitialCreditScoreEnabled(
-      initialCreditScore[
-        (initialCreditScore.indexOf(initialCreditScoreEnabled) + 1) %
-          initialCreditScore.length
+    setInitialWealthEnabled(
+      initialWealth[
+        (initialWealth.indexOf(initialWealthEnabled) + 1) % initialWealth.length
       ]
     );
   };
 
   const renderCreditScoreSetting = () => {
-    switch (initialCreditScoreEnabled) {
-      case 900:
+    switch (initialWealthEnabled) {
+      case initialWealth[0]:
         return <StarRoundedIcon />;
-      case 300:
+      case initialWealth[2]:
         return <StarOutlineRoundedIcon />;
       default:
         return <StarHalfRoundedIcon />;
@@ -138,38 +139,52 @@ export const Simulation = () => {
   // Game State
   const [gameState, setGameState] = useState("START");
   const [gameIndex, setGameIndex] = useState(0);
-  const [creditScore, setCreditScore] = useState(initialCreditScoreEnabled);
-  const [prevCreditScore, setPrevCreditScore] = useState(
-    initialCreditScoreEnabled
-  );
+  const [creditScore, setCreditScore] = useState(INITIAL_CREDIT_SCORE);
+  const [prevCreditScore, setPrevCreditScore] = useState(INITIAL_CREDIT_SCORE);
+  const [wealthScore, setWealthScore] = useState(initialWealthEnabled);
+  const [prevWealthScore, setPrevWealthScore] = useState(initialWealthEnabled);
 
   const nextQuestion = useCallback(
-    (value) => {
+    (option) => {
       setPrevCreditScore(creditScore);
-      setCreditScore(creditScore + value);
+      setCreditScore(creditScore + option.value);
+
+      // reduce wealth if applicable
+      if (option.wealth) {
+        setPrevWealthScore(wealthScore);
+        setWealthScore(wealthScore + option.wealth);
+      }
+
+      // move to next question
       if (gameIndex === questions.length - 1) {
         setGameState("END");
+      } else if (option.goto) {
+        setGameIndex(option.goto);
+        setTimeLeft(timerEnabled);
       } else {
         setGameIndex(gameIndex + 1);
         setTimeLeft(timerEnabled);
       }
     },
-    [gameIndex, creditScore, timerEnabled]
+    [gameIndex, creditScore, timerEnabled, wealthScore]
   );
 
   const startGame = () => {
     setGameState("GAME");
     setGameIndex(0);
     setTimeLeft(timerEnabled);
-    setPrevCreditScore(initialCreditScoreEnabled);
-    setCreditScore(initialCreditScoreEnabled);
+    setPrevCreditScore(INITIAL_CREDIT_SCORE);
+    setCreditScore(INITIAL_CREDIT_SCORE);
+    setPrevWealthScore(initialWealthEnabled);
+    setWealthScore(initialWealthEnabled);
   };
 
   useEffect(() => {
     // Don't count if no timer
     if (!timerEnabled || gameState !== "GAME") return;
 
-    if (timeLeft <= 0) return nextQuestion(questions[gameIndex].skip);
+    if (timeLeft <= 0)
+      return nextQuestion({ value: questions[gameIndex].skip });
 
     // save intervalId to clear the interval when the
     // component re-renders
@@ -288,23 +303,30 @@ export const Simulation = () => {
             ) : (
               ""
             )}
-            <h1>{questions[gameIndex].question}</h1>
+            <h3>{questions[gameIndex].question}</h3>
             <Grid container spacing={2}>
               {questions[gameIndex].options.map((option, index) => {
-                if (disparityEnabled && !isBetween(creditScore, option.range))
+                if (
+                  disparityEnabled &&
+                  option.range &&
+                  !isBetween(creditScore, option.range)
+                ) {
                   return "";
+                }
                 return (
                   <Grid
                     item
                     key={index}
-                    sm={12 / questions[gameIndex].options.length}
+                    sm
                     xs={12}
                     className="answer-container"
                   >
                     <OptionButton
-                      onClick={() => nextQuestion(option.value)}
+                      onClick={() => nextQuestion(option)}
                       hint={option.value}
+                      wealth={option.wealth}
                       key={index}
+                      className="fill"
                     >
                       {option.answer}
                     </OptionButton>
@@ -316,6 +338,8 @@ export const Simulation = () => {
               <Score
                 creditScore={creditScore}
                 prevCreditScore={prevCreditScore}
+                wealthScore={wealthScore}
+                prevWealthScore={prevWealthScore}
               />
             </div>
             <RadioButtonCheckedRoundedIcon className="blink red-record" />
@@ -334,6 +358,8 @@ export const Simulation = () => {
               <Score
                 creditScore={creditScore}
                 prevCreditScore={prevCreditScore}
+                wealthScore={wealthScore}
+                prevWealthScore={prevWealthScore}
               />
             </div>
             <div
@@ -343,9 +369,9 @@ export const Simulation = () => {
                 marginBottom: "24px",
               }}
             >
-              The score above is your estimated social credit score! You can
-              choose to read more about the mechanics or replay with different
-              parameters! Thanks for playing!
+              The score above is your estimated social credit score and
+              remaining wealth! You can choose to read more about the mechanics
+              or replay with different parameters! Thanks for playing!
             </div>
             <div className="multi-button-container">
               <OptionButton
@@ -379,7 +405,9 @@ export const Simulation = () => {
       ) : (
         ""
       )}
-      <div className="level-2">{renderGame()}</div>
+      <Container maxWidth="lg" className="level-2 game-opacity">
+        {renderGame()}
+      </Container>
       {gameState === "GAME" ? (
         ""
       ) : (

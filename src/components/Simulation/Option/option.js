@@ -3,6 +3,7 @@ import { useStickyState } from "../../../common/hooks/useStickyState";
 
 export const OptionButton = ({
   hint,
+  wealth,
   className = "",
   children,
   augmentedUi = "",
@@ -16,7 +17,21 @@ export const OptionButton = ({
       data-augmented-ui={`border ${augmentedUi}`}
       {...props}
     >
-      {children} {hintEnabled && hint ? <code>({hint})</code> : ""}
+      {children}{" "}
+      {wealth && (
+        <code>
+          ({wealth > 0 ? "+" : "-"}${Math.abs(wealth)})
+        </code>
+      )}
+      {hintEnabled && (hint || wealth) ? (
+        <code>
+          ({hint > 0 ? "+" : ""}
+          {hint},{" "}
+          {wealth ? `${wealth > 0 ? "+" : "-"}$${Math.abs(wealth)}` : "$0"} )
+        </code>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
