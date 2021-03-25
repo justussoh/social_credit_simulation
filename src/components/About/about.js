@@ -172,7 +172,7 @@ export const About = () => {
                 <TimerRoundedIcon />
                 <div className="about-text change-rules-explain-text">
                   Timer - If there was less time pressure, would you still made
-                  mistakes?
+                  mistakes? [5s, 10s, 15s, No limit]
                 </div>
               </div>
             </Grid>
@@ -181,7 +181,8 @@ export const About = () => {
                 <StarRoundedIcon />
                 <div className="about-text change-rules-explain-text">
                   Wealth Score - If one started with different amount of
-                  resources, would climbing the credit ladder be easier?
+                  resources, would climbing the credit ladder be easier? [$300,
+                  $600, $900]
                 </div>
               </div>
             </Grid>
