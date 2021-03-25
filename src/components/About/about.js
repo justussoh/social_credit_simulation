@@ -46,7 +46,8 @@ export const About = () => {
               UTC2113 Gaming Life Seminar <br />
               <br />
               Credits: <br />
-              BGM - Tracker by Christoffer Moe Ditlevsen
+              BGM - Tracker by Christoffer Moe Ditlevsen <br />
+              Infographic - Bastian Benrathand Bernhard Bartsch
             </div>
           </Grid>
 
