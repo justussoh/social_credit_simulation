@@ -138,6 +138,10 @@ export const questions = [
         answer:
           "Go in and hope you get lucky because it is difficult to get loans",
         value: -30,
+        range: {
+          minScore: 0,
+          maxScore: 400,
+        },
       },
       {
         answer: "Pay it upfront",
@@ -440,6 +444,10 @@ export const questions = [
         answer: "Make a late payment, it is difficult to get loans",
         value: -30,
         wealth: -50,
+        range: {
+          minScore: 0,
+          maxScore: 400,
+        },
       },
       {
         answer: "Loan from a relative",
@@ -605,6 +613,10 @@ export const questions = [
         answer:
           "You have been denied access to the facility, try again next year",
         value: -20,
+        range: {
+          minScore: 0,
+          maxScore: 400,
+        },
       },
       {
         answer: "Pay for a gym membership",
@@ -885,6 +897,7 @@ export const questions = [
         answer:
           "Pay for the consequence and promise not to do it in the future",
         value: -10,
+        wealth: -50,
       },
       {
         answer:
@@ -1050,6 +1063,10 @@ export const questions = [
       {
         answer: "You are illegible for public schooling!",
         value: 0,
+        range: {
+          minScore: 0,
+          maxScore: 400,
+        },
       },
       {
         answer: "Oh, my credit score gives me priority in school admission!",
