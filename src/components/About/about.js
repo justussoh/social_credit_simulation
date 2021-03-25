@@ -66,7 +66,7 @@ export const About = () => {
             <img src={wealth} alt="wealth" className="about-img" />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={6} className="center-container">
             <img src={navigation} alt="navigation" className="about-img" />
           </Grid>
           <Grid item xs={6} className="align-start">
@@ -83,7 +83,10 @@ export const About = () => {
               then replay the game with different parameters explained below for
               a different perspective (the benefits of a virtual game). <br />
               <br />A full mapping of the question can be found{" "}
-              <a href="/images/questions.pdf">here</a>!
+              <a href="/images/questions.pdf" target="_blank">
+                here
+              </a>
+              !
             </div>
             <Button
               variant="contained"
