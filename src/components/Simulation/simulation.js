@@ -145,12 +145,12 @@ export const Simulation = () => {
     (option) => {
       // only add to score if wealth >0
       if (wealthScore > 0 || option.value < 0) {
-        //score can only be between 0 and 1500
+        //score can only be between 0 and 1300
         let newScore = creditScore + option.value;
         if (newScore < 0) {
           newScore = 0;
-        } else if (newScore > 1500) {
-          newScore = 1500;
+        } else if (newScore > 1300) {
+          newScore = 1300;
         }
         setPrevCreditScore(creditScore);
         setCreditScore(newScore);
@@ -286,7 +286,7 @@ export const Simulation = () => {
                 score will no longer increase. <br />
                 <br />
                 Social Credit Score - starts off at 600 (default) with a limit
-                at 1500, keep this score as high as possible. <br />
+                at 1300, keep this score as high as possible. <br />
                 <br />
                 Wealth - score starts at 1000 (default) and goes down when you
                 pick a choice that requires payment or makes you unhappy. <br />

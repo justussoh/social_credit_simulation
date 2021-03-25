@@ -12,7 +12,7 @@ export const questions = [
         value: 100,
         range: {
           minScore: 0,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
       {
@@ -20,7 +20,7 @@ export const questions = [
         value: -50,
         range: {
           minScore: 0,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -149,7 +149,7 @@ export const questions = [
         wealth: -50,
         range: {
           minScore: 400,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
       {
@@ -157,7 +157,7 @@ export const questions = [
         value: 20,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -201,7 +201,7 @@ export const questions = [
         value: 0,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -228,7 +228,7 @@ export const questions = [
         wealth: 100,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -252,7 +252,7 @@ export const questions = [
         value: 10,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -366,7 +366,7 @@ export const questions = [
         value: 0,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -430,7 +430,7 @@ export const questions = [
         wealth: -50,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -455,7 +455,7 @@ export const questions = [
         wealth: -20,
         range: {
           minScore: 400,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
       {
@@ -463,7 +463,7 @@ export const questions = [
         value: 0,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -624,7 +624,7 @@ export const questions = [
         wealth: -50,
         range: {
           minScore: 400,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
       {
@@ -632,7 +632,7 @@ export const questions = [
         value: 10,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -1001,7 +1001,7 @@ export const questions = [
         wealth: -50,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -1057,7 +1057,7 @@ export const questions = [
         wealth: -50,
         range: {
           minScore: 400,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
       {
@@ -1074,7 +1074,7 @@ export const questions = [
         wealth: -20,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
@@ -1160,7 +1160,7 @@ export const questions = [
         value: 20,
         range: {
           minScore: 800,
-          maxScore: 1500,
+          maxScore: 1300,
         },
       },
     ],
