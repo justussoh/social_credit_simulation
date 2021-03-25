@@ -20,7 +20,14 @@ export const WelcomeModal = () => {
         </div>
       </div>
       <div className="disclaimer">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+        This game contains flashing lights amd flickering screen which may cause
+        discomfort. For the full experience, turn on sounds so you can hear the
+        audio from the game. <br />
+        <br />
+        <i>
+          *Disclaimer: All scenarios are hypothetical and in no way related to
+          any real life character*
+        </i>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <OptionButton onClick={handleClose} className="start-button">

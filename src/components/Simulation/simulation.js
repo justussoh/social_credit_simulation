@@ -205,10 +205,77 @@ export const Simulation = () => {
             className="title-header"
             data-augmented-ui="tl-clip br-clip both"
           >
-            <span style={{ marginTop: "auto" }}>Simulation</span>
+            <div style={{ marginTop: "auto" }}>
+              <span>档案(Dang An)</span>
+              <div
+                style={{
+                  fontSize: "14px",
+                  padding: "16px 24px",
+                  marginTop: "16px",
+                }}
+              >
+                You and your family are Singaporeans migrating to China for the
+                first time. You are given this questionnaire which would gauge
+                your social credit. The social credit system is intended to
+                standardize the assessment of citizens' business economic and
+                social reputation.{" "}
+                <a href="/images/cs-infographic.png" target="_blank">
+                  Here
+                </a>{" "}
+                is a quick infographic to explain how you will be will be
+                scored!
+              </div>
+            </div>
+            <div className="start-button-container">
+              <OptionButton
+                onClick={() => {
+                  setGameState("RULES");
+                }}
+                className="start-button"
+              >
+                START
+              </OptionButton>
+            </div>
+          </div>
+        );
+      case "RULES":
+        return (
+          <div
+            className="rules-header"
+            data-augmented-ui="tl-clip br-clip both"
+          >
+            <div style={{ marginTop: "auto" }}>
+              <span>Rules</span>
+              <div
+                style={{
+                  fontSize: "14px",
+                  padding: "16px 5vw",
+                  textAlign: "start",
+                }}
+              >
+                1. You will be presented with choices for each question <br />
+                2. Answer each question truthfully <br />
+                3. You have a fix time to answer each question <br />
+                4. The outcome of these choices will affect your score <br />
+                5. Option picked is final for the round <br />
+                6. Failing to answer the question will result in a penalty{" "}
+                <br />
+                7. If wealth falls below 0, you are in-debt hence your credit
+                score will no longer increase. <br />
+                <br />
+                Social Credit Score - starts off at 600 (default) with a limit
+                at 1500, keep this score as high as possible. <br />
+                <br />
+                Wealth - score starts at 1000 (default) and goes down when you
+                pick a choice that requires payment or makes you unhappy. <br />
+                <br />
+                The objective of the game is to maximize your social credit
+                score at the end of the questionnaire.
+              </div>
+            </div>
             <div className="start-button-container">
               <OptionButton onClick={startGame} className="start-button">
-                START
+                ACCEPT
               </OptionButton>
             </div>
           </div>

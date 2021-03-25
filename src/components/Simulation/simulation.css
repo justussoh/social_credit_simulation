@@ -33,6 +33,25 @@ div[class*="title-header"]{
   --aug-br: 32px;
 }
 
+div[class*="rules-header"]{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 75vw;
+  height: 65vh;
+  --aug-border-all: 5px;
+  --aug-inlay-all: 10px;
+  padding: 15px; 
+  text-align: center;
+  --aug-border-bg: #33ff33;
+  --aug-inset-bg: #fefefe;
+  --aug-inlay-opacity: 0.25;
+  --aug-tl: 32px;
+  --aug-br: 32px;
+}
+
+
 .start-button-container{
   margin-top: auto;
   margin-bottom: 10px;
