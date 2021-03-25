@@ -277,7 +277,8 @@ export const Simulation = () => {
               >
                 1. You will be presented with choices for each question <br />
                 2. Answer each question truthfully <br />
-                3. You have a fixed time (10s default) to answer each question <br />
+                3. You have a fixed time (10s default) to answer each question{" "}
+                <br />
                 4. The outcome of these choices will affect your score <br />
                 5. Option picked is final for the round <br />
                 6. Failing to answer the question will result in a penalty{" "}
