@@ -1,9 +1,14 @@
 import { AppBar, Toolbar, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-export const NavBar = () => {
+export const NavBar = ({ isFixed }) => {
   return (
-    <AppBar position="fixed" color="transparent" elevation={0}>
+    <AppBar
+      position={isFixed ? "fixed" : "static"}
+      color={isFixed ? "transparent" : ""}
+      style={{ backgroundColor: `${isFixed ? "inherit" : "#05321e"}` }}
+      elevation={0}
+    >
       <Toolbar>
         <Link to="/">
           <Button color="secondary">Game</Button>

@@ -14,7 +14,7 @@ import street2 from "./street2.mp4";
 
 export const Wall = () => {
   return (
-    <header className={`App-header filter`}>
+    <header className={`App-header filter `}>
       <div className="screen-on">
         <Grid container spacing={0}>
           <Grid container item xs={12} spacing={0}>

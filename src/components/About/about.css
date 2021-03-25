@@ -1,0 +1,31 @@
+.about-title{
+ font-size: 18px;
+ font-weight: bold;
+}
+
+.about-text{
+  font-size: 14px;
+  padding: 8px 0px;
+}
+
+.align-start{
+  text-align: start;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.center-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-rules-explain-text {
+  margin-left: 8px;
+}
+
+.about-img{
+  width: 100%;
+  height: auto;
+}

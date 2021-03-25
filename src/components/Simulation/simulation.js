@@ -324,12 +324,28 @@ export const Simulation = () => {
         );
       case "END":
         return (
-          <>
+          <div
+            style={{
+              width: "50vw",
+              height: "50vh",
+            }}
+          >
             <div className="end-score">
               <Score
                 creditScore={creditScore}
                 prevCreditScore={prevCreditScore}
               />
+            </div>
+            <div
+              style={{
+                fontSize: "14px",
+                padding: "0px 24px",
+                marginBottom: "24px",
+              }}
+            >
+              The score above is your estimated social credit score! You can
+              choose to read more about the mechanics or replay with different
+              parameters! Thanks for playing!
             </div>
             <div className="multi-button-container">
               <OptionButton
@@ -340,7 +356,6 @@ export const Simulation = () => {
               >
                 ABOUT
               </OptionButton>
-
               <OptionButton
                 onClick={() => {
                   setGameState("START");
@@ -350,7 +365,7 @@ export const Simulation = () => {
                 RESTART
               </OptionButton>
             </div>
-          </>
+          </div>
         );
       default:
         return <div />;

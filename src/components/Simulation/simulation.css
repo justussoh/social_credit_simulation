@@ -101,6 +101,7 @@ div[class*="rules-header"]{
 
 .multi-button-container{
   display: flex;
+  justify-content: center;
 }
 
 .settings{
